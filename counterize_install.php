@@ -172,14 +172,8 @@ function counterize_install()
     counterize_update_all_userAgents();                
   }
   
-  if($minorVersion < 12)
-  {
-    $sql = "ALTER TABLE `".counterize_logTable()."` ADD INDEX ( `timestamp` );";
-    $wpdb->query($sql);     
-  }
-  
   // Set new Version
   update_option('counterize_MajorVersion',2);
-  update_option('counterize_MinorVersion',12);
+  update_option('counterize_MinorVersion',10);
 }
 ?>
