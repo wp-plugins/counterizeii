@@ -3,14 +3,12 @@
  Plugin Name: Counterize II
  Plugin URI: http://www.navision-blog.de/counterize
  Description: Simple counter-plugin with no external libs - saves IP, timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
- Version: 2.12
+ Version: 2.11
  Author: Steffen Forkmann
  Author URI: http://navision-blog.de
 */
 
 /*
- New in 2.12
- - lots of sql fixing (thaks to Eric blogs.jobdig.com/wwds)
  New in 2.11
  - XHTML valid (thanks to Julia http://julialoeba.de)
  - Japanese version (thanks to Urepko http://wppluginsj.sourceforge.jp/)
@@ -878,68 +876,75 @@ function counterize_pagefooter()
 
 function counterize_copyright()
 {
-	?>
-<br />
-<br />
-<p style="text-align: center"><small> <?php
-_e('Statistics recorded with <a href="http://www.navision-blog.de/counterize" title="Counterize II - Statistics-plugin for Wordpress by Steffen Forkmann">Counterize II</a>','counterize');
-echo ' - Version ' . get_option('counterize_MajorVersion') . "." . get_option('counterize_MinorVersion');
-?> </small></p>
-<p><?php
+  ?><br /><br />
+  <p style="text-align:center"><small>
+    <?php
+      _e('Statistics recorded with <a href="http://www.navision-blog.de/counterize" title="Counterize II - Statistics-plugin for Wordpress by Steffen Forkmann">Counterize II</a>','counterize');
+      echo ' - Version ' . get_option('counterize_MajorVersion') . "." . get_option('counterize_MinorVersion');
+    ?>
+  </small></p><p>
+  <?php
 }
 
 function counterize_renderstats_vertical($rows, $header, $max_width = "500",
-$nofollow = true, $maxwidth = "100%", $shorten = true)
+  $nofollow = true, $maxwidth = "100%", $shorten = true)
 {
-	$max_label = get_option('counterize_maxWidth');
-	foreach($rows as $row)
-	{
-		$items++;
-		$complete_amount += $row->amount;
-		if($row->amount > $max)
-		$max = $row->amount;
-	}
+    $max_label = get_option('counterize_maxWidth');
+    foreach($rows as $row)
+        {
+            $items++;
+            $complete_amount += $row->amount;
+            if($row->amount > $max)
+              $max = $row->amount;
+        }
 
-	?>
-<table width="<?php echo $maxwidth; ?>">
-	<tr class="alternate">
-		<td style="width: 25%"><small><strong><?php _e($header,'counterize'); ?></strong></small></td>
-		<td style="width: 10%"><small><strong><?php _e('Amount','counterize'); ?></strong></small></td>
-		<td style="width: 65%"><small><strong><?php _e('Graph / %','counterize'); ?></strong></small></td>
-	</tr>
+  ?>
+  <table width="<?php echo $maxwidth; ?>">
+  <tr class="alternate">
+        <td style="width:25%"><small><strong><?php _e($header,'counterize'); ?></strong></small></td>
+        <td style="width:10%"><small><strong><?php _e('Amount','counterize'); ?></strong></small></td>
+        <td style="width:65%"><small><strong><?php _e('Graph / %','counterize'); ?></strong></small></td>
+  </tr>
 
-	<?php
-	foreach($rows as $row)
-	{
-		$percent = round($row->amount / $complete_amount * 100,2);
+  <?php
+    foreach($rows as $row)
+        {
+                  $percent = round($row->amount / $complete_amount * 100,2);
 
-		if($row->amount)
-		$width = round($row->amount * $max_width / $max);
-		else
-		$width = 0;
+            if($row->amount)
+                    $width = round($row->amount * $max_width / $max);
+        else
+          $width = 0;
 
-		$group = round($width / $max_width * 100);
-		?>
-	<tr <?php if($counter%2) { print " class=\"alternate\""; }?>>
-		<td style="width: 25%" align="left"><small> <?php
-		if(strlen($row->label) > $max_label && $shorten == true)
-		$label = substr($row->label,0,$max_label) . '...';
-		else
-		$label = $row->label;
-		if($row->url)
-		{
-			echo "<a href=\"" . $row->url . "\"";
-			if($nofollow)
-			echo " rel=\"nofollow\"";
-			echo ">" . $label . "</a>";
-		}
-		else
-		echo $label;
-		?> </small></td>
+        $group = round($width / $max_width * 100);
+        ?>
+        <tr<?php if($counter%2) { print " class=\"alternate\""; }?>>
+                <td style="width:25%" align="left">
+                        <small>
+                        <?php
+                          if(strlen($row->label) > $max_label && $shorten == true)
+              $label = substr($row->label,0,$max_label) . '...';
+            else
+              $label = $row->label;
+            if($row->url)
+            {
+              echo "<a href=\"" . $row->url . "\"";
+              if($nofollow)
+                echo " rel=\"nofollow\"";
+              echo ">" . $label . "</a>";
+            }
+            else
+              echo $label;
+          ?>
+                        </small>
+                </td>
 
-		<td style="width: 10%"><small> <?php echo $row->amount; ?> </small></td>
+                <td style="width:10%">
+                        <small> <?php echo $row->amount; ?> </small>
+                </td>
 
-		<td style="width: 65%" align="left"><img src="<?php echo get_option("siteurl") . "/wp-content/plugins/";
+                <td style="width:65%" align="left">
+        <img src="<?php echo get_option("siteurl") . "/wp-content/plugins/";
                         if ($group < 40)
                                 echo "counterize/counterize_red.png";
                         else if ($group < 80)
@@ -948,53 +953,53 @@ $nofollow = true, $maxwidth = "100%", $shorten = true)
                                 echo "counterize/counterize_green.png";
                         ?>" style="height:8px; width:<?php echo $width ?>px; vertical-align:bottom"
                         alt="<?php echo $header . ' - ' . htmlspecialchars($row->label) . ' - ' . $row->amount . ' - ' . $percent . ' %' ?>" />
-		&nbsp; <small><strong> <?php echo $percent; ?> % </strong></small></td>
-	</tr>
-	<?php $counter++;
-}
-?>
-</table>
+                        &nbsp; <small><strong> <?php echo $percent; ?> % </strong></small>
+                </td>
+        </tr>
+          <?php $counter++;
+        }
+  ?>
+  </table>
 
-<?php
+  <?php
 }
 
 
 function counterize_renderstats($rows, $max_height = 80, $maxwidth = "100%")
 {
 
-	?>
-<table width="<?php echo $maxwidth; ?>">
-	<tr>
-	<?php
+  ?>
+  <table width="<?php echo $maxwidth; ?>">
+        <tr>
+        <?php
 
-	foreach($rows as $row)
-	{
-		$items++;
-		$complete_amount += $row->amount;
-		if($row->amount > $max)
-		$max = $row->amount;
-	}
+          foreach($rows as $row)
+          {
+            $items++;
+            $complete_amount += $row->amount;
+            if($row->amount > $max)
+              $max = $row->amount;
+          }
 
-	foreach($rows as $row)
-	{
-		$percent = round($row->amount / $complete_amount * 100,2);
+                foreach($rows as $row)
+                {
+                  $percent = round($row->amount / $complete_amount * 100,2);
 
-		if($row->amount)
-		$height = round($row->amount * $max_height / $max);
-		else
-		$height = 0;
+            if($row->amount)
+                    $height = round($row->amount * $max_height / $max);
+        else
+          $height = 0;
 
-		$group = round($height / $max_height * 100);
+        $group = round($height / $max_height * 100);
 
-		echo "<td style=\"width:3%\"";
-		if($i%2)
-		print "class=\"alternate\"";
+                        echo "<td style=\"width:3%\"";
+                        if($i%2)
+          print "class=\"alternate\"";
 
-		echo " align=\"center\" valign=\"bottom\"><small>";
-		echo $row->amount;
-		?>
-		<br />
-		<img src="<?php echo get_option("siteurl") . "/wp-content/plugins/";
+                        echo " align=\"center\" valign=\"bottom\"><small>";
+                        echo $row->amount;
+                        ?> <br />
+                        <img src="<?php echo get_option("siteurl") . "/wp-content/plugins/";
                         if ($group < 40)
                                 echo "counterize/counterize_red.png";
                         else if ($group < 80)
@@ -1005,24 +1010,24 @@ function counterize_renderstats($rows, $max_height = 80, $maxwidth = "100%")
                         <?php
                         echo "<br />$percent<br />%</small></td>";
                         $i++;
-}
-?>
-	</tr>
-	<tr>
-	<?php
-	$i = 0;
-	foreach($rows as $row)
-	{
-		echo "<td style=\"width:3%\"";
-		if($i % 2)
-		echo "class=\"alternate\"";
-		echo " align=\"center\"><small><strong>$row->label</strong></small></td>";
-		$i++;
-	}
-	?>
-	</tr>
-</table>
-	<?php
+                }
+        ?>
+        </tr>
+        <tr>
+        <?php
+          $i = 0;
+                foreach($rows as $row)
+                {
+                        echo "<td style=\"width:3%\"";
+                        if($i % 2)
+          echo "class=\"alternate\"";
+                        echo " align=\"center\"><small><strong>$row->label</strong></small></td>";
+                        $i++;
+                }
+        ?>
+  </tr>
+  </table>
+  <?php
 }
 
 # Do the installation stuff, if the plugin is marked to be activated...
@@ -1030,235 +1035,246 @@ include("counterize_install.php");
 $install = (basename($_SERVER['SCRIPT_NAME']) == 'plugins.php' && isset($_GET['activate']));
 if ($install)
 {
-	counterize_install();
+  counterize_install();
 }
 
 function counterize_show_history()
 {
-	$howmany = __("Latest entries",'counterize');
+  $howmany = __("Latest entries",'counterize');
 
-	$amount = get_option('counterize_amount');
-	if ($amount == "" || $amount == " ")
-	$amount = 50;
+  $amount = get_option('counterize_amount');
+  if ($amount == "" || $amount == " ")
+        $amount = 50;
 
-	$howmany = $howmany . " (" .$amount .")";
-	$entries = counterize_getentries($amount);
+  $howmany = $howmany . " (" .$amount .")";
+  $entries = counterize_getentries($amount);
 
-	?>
-<div class="wrap">
-<h2><?php echo $howmany; ?></h2>
+  ?>
+     <div class="wrap">
+        <h2>
+        <?php echo $howmany; ?>
+        </h2>
+ 
+        <a href="edit.php?page=counterize/counterize.php"><?php _e("Reset Filters",'counterize'); ?></a></br></br>
+<form method="post" action="edit.php?page=counterize/counterize.php&amp;killmass=yes" name="tablesForm" id="tablesForm">
+                <table width="100%" cellpadding="3" cellspacing="3">
+                <tr class="alternate">
+                <td scope="col" width="2%"><strong><?php _e("del",'counterize'); ?></strong></td>
+                <td scope="col" width="6%"><strong><?php _e("ID",'counterize'); ?></strong></td>
+                <td scope="col" width="13%"><strong><?php _e("IP",'counterize'); ?></strong></td>
+                <td scope="col" style="width:14%"><strong><?php _e("Timestamp",'counterize'); ?></strong></td>
+                <td scope="col" style="width:30%"><strong><?php _e("URl",'counterize'); ?></strong></td>
+                <td scope="col" style="width:20%"><strong><?php _e("Referer",'counterize'); ?></strong></td>
+                <td scope="col" style="width:14%"><strong><?php _e("UserAgent",'counterize'); ?></strong></td>
+                <td scope="col" style="width:25%"><strong><?php _e("Keywords",'counterize'); ?></strong></td>
+                <td scope="col" style="width:3%"><strong><?php _e("Kill",'counterize'); ?></strong></td>
+                </tr>
 
-<a href="edit.php?page=counterize/counterize.php"><?php _e("Reset Filters",'counterize'); ?></a></br>
-</br>
-<form method="post"
-	action="edit.php?page=counterize/counterize.php&amp;killmass=yes"
-	name="tablesForm" id="tablesForm">
-<table width="100%" cellpadding="3" cellspacing="3">
-	<tr class="alternate">
-		<td scope="col" width="2%"><strong><?php _e("del",'counterize'); ?></strong></td>
-		<td scope="col" width="6%"><strong><?php _e("ID",'counterize'); ?></strong></td>
-		<td scope="col" width="13%"><strong><?php _e("IP",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 14%"><strong><?php _e("Timestamp",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 30%"><strong><?php _e("URl",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 20%"><strong><?php _e("Referer",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 14%"><strong><?php _e("UserAgent",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 25%"><strong><?php _e("Keywords",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 3%"><strong><?php _e("Kill",'counterize'); ?></strong></td>
-	</tr>
-
-	<?php
-	foreach($entries as $entry)
-	{
-		?>
-	<tr <?php if($i%2) { print "class=\"alternate\""; } ?>>
-		<td scope="col" width="6%"><small> <input type="checkbox"
-			name='counterize_killemall[<?php echo $entry->id; ?>]'
-			value="<?php echo $entry->id; ?>" /></td>
-		<td><?php echo $entry->id; ?></small></td>
-		<td scope="col" width="10%"><small><?php echo "<a href=\"" . get_option("counterize_whois") . $entry->ip . "\">" . $entry->ip . "</a>"; ?>
-		(<a
-			href="edit.php?page=counterize/counterize.php&ipfilter=<?php echo $entry->ip; ?>">F</a>)
-		(<a target="_blank"
-			href="http://www.geoiptool.com/?IP=<?php echo $entry->ip; ?>">V</a>)</small>
-		</td>
-		<td scope="col" width="14%"><small><?php echo $entry->timestamp; ?> </small></td>
-		<td scope="col" width="25%"><small><?php echo "<a href=\"" . $entry->url . "\">" . wordwrap($entry->url, 30, "\n", 1); ?>
-		</a> (<a
-			href="edit.php?page=counterize/counterize.php&urifilter=<?php echo $entry->url; ?>">F</a>)</small></td>
-		<td scope="col" width="20%"><small> <?php
-		if ($entry->referer != "unknown")
-		{
-			echo "<a href=\"" . $entry->referer . "\">" . wordwrap($entry->referer, 30, "\n", 1) . "</a>";
-			?> (<a
-			href="edit.php?page=counterize/counterize.php&refererfilter=<?php echo $entry->referer; ?>">F</a>)
-			<?php
-}
-else
-echo wordwrap($entry->referer, 30, "\n", 1);
-?> </small></td>
-		<td scope="col" style="width: 25%"><small><?php echo counterize_browser_string($entry->useragent , true, '<br>'); ?></small>
-		</td>
-		<td><small><?php echo $entry->keyword; ?></small></td>
-		<td scope="col" style="width: 5%"><a
-			href="javascript:conf('edit.php?page=counterize/counterize.php&amp;kill=<?php echo $entry->id; ?>');">
-		<font color="red" size="+1">X</font> </a></td>
-		<?php
-		$i++;
-}
-?>
-	</tr>
-</table>
-
-<input type="button" name="CheckAll"
-	value="<?php _e("Check All",'counterize'); ?>"
-	onClick="checkAll(document.tablesForm)" /> <input type="button"
-	name="UnCheckAll" value="<?php _e("Uncheck All",'counterize'); ?>"
-	onClick="uncheckAll(document.tablesForm)" /> <input type="SUBMIT"
-	value="<?php _e("Delete selected Entries",'counterize'); ?>" /></form>
-</div>
-
-<?php
+                <?php
+                foreach($entries as $entry)
+      {
+      ?>
+        <tr <?php if($i%2) { print "class=\"alternate\""; } ?>>
+                                <td scope="col" width="6%"><small>
+								<input type="checkbox" name='counterize_killemall[<?php echo $entry->id; ?>]'
+            						 value="<?php echo $entry->id; ?>" /></td>
+            				    <td><?php echo $entry->id; ?></small> </td>
+                                <td scope="col" width="10%"><small><?php echo "<a href=\"" . get_option("counterize_whois") . $entry->ip . "\">" . $entry->ip . "</a>"; ?>
+            (<a href="edit.php?page=counterize/counterize.php&ipfilter=<?php echo $entry->ip; ?>">F</a>)
+            (<a target="_blank" href="http://www.geoiptool.com/?IP=<?php echo $entry->ip; ?>">V</a>)</small> </td>
+                                <td scope="col" width="14%"><small><?php echo $entry->timestamp; ?> </small></td>
+                                <td scope="col" width="25%"><small><?php echo "<a href=\"" . $entry->url . "\">" . wordwrap($entry->url, 30, "\n", 1); ?> </a>
+          (<a href="edit.php?page=counterize/counterize.php&urifilter=<?php echo $entry->url; ?>">F</a>)</small></td>
+                                <td scope="col" width="20%"><small>
+                                <?php
+                                if ($entry->referer != "unknown")
+          {
+                                        echo "<a href=\"" . $entry->referer . "\">" . wordwrap($entry->referer, 30, "\n", 1) . "</a>";
+                                        ?> (<a href="edit.php?page=counterize/counterize.php&refererfilter=<?php echo $entry->referer; ?>">F</a>) <?php
+                                }
+                                else
+                                        echo wordwrap($entry->referer, 30, "\n", 1);
+                                ?>
+                                </small></td>
+                                <td scope="col" style="width:25%"><small><?php echo counterize_browser_string($entry->useragent , true, '<br>'); ?></small> </td>
+          <td><small><?php echo $entry->keyword; ?></small></td>
+                                <td scope="col" style="width:5%">
+                                <a href="javascript:conf('edit.php?page=counterize/counterize.php&amp;kill=<?php echo $entry->id; ?>');">
+                                        <font color="red" size="+1">X</font>
+                                </a>
+                                </td>
+                <?php
+                  $i++;
+      }
+      ?>
+        </tr></table>
+	 
+	<input type="button" name="CheckAll"   value="<?php _e("Check All",'counterize'); ?>"
+		onClick="checkAll(document.tablesForm)" />
+	<input type="button" name="UnCheckAll" value="<?php _e("Uncheck All",'counterize'); ?>"
+		onClick="uncheckAll(document.tablesForm)" />
+	<input type="SUBMIT" value="<?php _e("Delete selected Entries",'counterize'); ?>" />
+	 
+	</form>
+  </div>
+ 
+  <?php
 
 }
 
 function counterize_updateText($text="Configuration updated", $color="red")
 {
-	echo "<div id=\"message\" class=\"updated fade\"><p><font color=\"$color\">";
-	_e($text,'counterize');
-	echo "</font></p></div>";
+  echo "<div id=\"message\" class=\"updated fade\"><p><font color=\"$color\">";
+  _e($text,'counterize');
+  echo "</font></p></div>";
 }
 
 function counterize_showStats($admin = false)
 {
-	if(!counterize_getamount())
-	{
-		_e("There's no data in the database - You can't see stats until you have data.",'counterize');
-		return;
-	}
-	?>
-</p>
-<div class="wrap">
-<h2><?php _e('Hit Counter',"counterize");?></h2>
-<table width="100%" cellpadding="3" cellspacing="3">
-	<tr>
-		<td scope="col" style="width: 15%" align="center"><?php _e("Total hits: ",'counterize'); ?>
-		</td>
-		<td scope="col" style="width: 15%" align="center"><?php _e("Hits from unique IPs: ",'counterize'); ?>
-		</td>
-		<td scope="col" style="width: 15%" align="center"><?php _e("Total hits, today: ",'counterize'); ?>
-		</td>
-		<td scope="col" style="width: 20%" align="center"><?php _e("Hits from unique IPs, today: ",'counterize'); ?>
-		</td>
-		<td scope="col" style="width: 15%" align="center"><?php _e("Hits, the last 7 days: ",'counterize'); ?>
-		</td>
-		<td scope="col" style="width: 20%" align="center"><?php _e("Unique hits, the last 7 days: ",'counterize'); ?>
-		</td>
-	</tr>
-	<tr>
-		<td align="center"><strong><?php echo counterize_getamount(); ?></strong></td>
-		<td align="center"><strong><?php echo counterize_getuniqueamount(); ?></strong></td>
-		<td align="center"><strong><?php echo counterize_gethitstoday(); ?></strong></td>
-		<td align="center"><strong><?php echo counterize_getuniquehitstoday(); ?></strong></td>
-		<td align="center"><strong><?php echo counterize_getlatest7days(); ?></strong></td>
-		<td align="center"><strong><?php echo counterize_getuniquelatest7days(); ?></strong></td>
-	</tr>
-</table>
-</div>
+  if(!counterize_getamount())
+  {
+    _e("There's no data in the database - You can't see stats until you have data.",'counterize');
+    return;
+  }
+  ?>
+  </p><div class="wrap">
+        <h2><?php _e('Hit Counter',"counterize");?></h2>
+  <table width="100%" cellpadding="3" cellspacing="3">
+        <tr>
+                <td scope="col" style="width:15%" align="center">
+                        <?php _e("Total hits: ",'counterize'); ?>
+                </td>
+                <td scope="col" style="width:15%" align="center">
+                        <?php _e("Hits from unique IPs: ",'counterize'); ?>
+                </td>
+                <td scope="col" style="width:15%" align="center">
+                        <?php _e("Total hits, today: ",'counterize'); ?>
+                </td>
+                <td scope="col" style="width:20%" align="center">
+                        <?php _e("Hits from unique IPs, today: ",'counterize'); ?>
+                </td>
+                <td scope="col" style="width:15%" align="center">
+                        <?php _e("Hits, the last 7 days: ",'counterize'); ?>
+        </td>
+                <td scope="col" style="width:20%" align="center">
+                        <?php _e("Unique hits, the last 7 days: ",'counterize'); ?>
+                </td>
+        </tr>
+        <tr>
+          <td align="center"><strong><?php echo counterize_getamount(); ?></strong></td>
+          <td align="center"><strong><?php echo counterize_getuniqueamount(); ?></strong></td>
+          <td align="center"><strong><?php echo counterize_gethitstoday(); ?></strong></td>
+          <td align="center"><strong><?php echo counterize_getuniquehitstoday(); ?></strong></td>
+          <td align="center"><strong><?php echo counterize_getlatest7days(); ?></strong></td>
+          <td align="center"><strong><?php echo counterize_getuniquelatest7days(); ?></strong></td>
+        </tr>
+  </table>
+  </div>
 
-	<?php
-	# Amount to pass as option to the graphs...
-	$amount2 = get_option('counterize_amount2');
-	if ($amount2 == "" || $amount2 == " ")
-	$amount2 = 5;
-	$width = 250;
-	?>
+  <?php
+  # Amount to pass as option to the graphs...
+  $amount2 = get_option('counterize_amount2');
+  if ($amount2 == "" || $amount2 == " ")
+        $amount2 = 5;
+  $width = 250;
+  ?>
 
-<div class="wrap">
-<h2><?php _e('Visits based on day of month','counterize');?></h2>
-	<?php
-	if($admin)
-	counterize_renderstats(counterize_getdailystats());
-	else
-	counterize_renderstats_vertical(counterize_getdailystats(),__("Day",'counterize'),$width);
-	?></div>
+  <div class="wrap">
+        <h2><?php _e('Visits based on day of month','counterize');?></h2>
+        <?php
+      if($admin)
+        counterize_renderstats(counterize_getdailystats());
+      else
+        counterize_renderstats_vertical(counterize_getdailystats(),__("Day",'counterize'),$width);
+    ?>
+  </div>
 
-<div class="wrap">
-<h2><?php _e('Visits based on day of month (only this month)','counterize');?></h2>
-	<?php
-	if($admin)
-	counterize_renderstats(counterize_getdailystats(true));
-	else
-	counterize_renderstats_vertical(counterize_getdailystats(true),__("Day",'counterize'),$width);
-	?></div>
+  <div class="wrap">
+        <h2><?php _e('Visits based on day of month (only this month)','counterize');?></h2>
+        <?php
+          if($admin)
+        counterize_renderstats(counterize_getdailystats(true));
+      else
+        counterize_renderstats_vertical(counterize_getdailystats(true),__("Day",'counterize'),$width);
+    ?>
+  </div>
 
 
-<div class="wrap">
-<h2><?php _e('Visits based on day of week','counterize');?></h2>
-	<?php
-	if($admin)
-	counterize_renderstats(counterize_getweeklystats());
-	else
-	counterize_renderstats_vertical(counterize_getweeklystats(),__("Day",'counterize'),$width);
-	?></div>
+  <div class="wrap">
+        <h2><?php _e('Visits based on day of week','counterize');?></h2>
+        <?php
+          if($admin)
+        counterize_renderstats(counterize_getweeklystats());
+      else
+        counterize_renderstats_vertical(counterize_getweeklystats(),__("Day",'counterize'),$width);
+    ?>
+  </div>
 
-<div class="wrap">
-<h2><?php _e('Visits based on month','counterize');?></h2>
-	<?php
-	if($admin)
-	counterize_renderstats(counterize_getmonthlystats());
-	else
-	counterize_renderstats_vertical(counterize_getmonthlystats(),__("Month",'counterize'),$width);
-	?></div>
+  <div class="wrap">
+        <h2><?php _e('Visits based on month','counterize');?></h2>
+        <?php
+      if($admin)
+        counterize_renderstats(counterize_getmonthlystats());
+      else
+        counterize_renderstats_vertical(counterize_getmonthlystats(),__("Month",'counterize'),$width);
+    ?>
+  </div>
 
-<div class="wrap">
-<h2><?php _e('Visits based on hour of day','counterize');?></h2>
-	<?php
-	if($admin)
-	counterize_renderstats(counterize_gethourlystats());
-	else
-	counterize_renderstats_vertical(counterize_gethourlystats(),__("Hour",'counterize'),$width);
-	?></div>
+  <div class="wrap">
+        <h2><?php _e('Visits based on hour of day','counterize');?></h2>
+        <?php
+          if($admin)
+        counterize_renderstats(counterize_gethourlystats());
+      else
+        counterize_renderstats_vertical(counterize_gethourlystats(),__("Hour",'counterize'),$width);
+    ?>
+  </div>
 
-<div class="wrap">
-<h2><?php echo __("Most visited pages ",'counterize') . "(" . $amount2 .")"; ?></h2>
-	<?php counterize_most_visited_pages($amount2,$width); ?></div>
+  <div class="wrap">
+        <h2><?php echo __("Most visited pages ",'counterize') . "(" . $amount2 .")"; ?></h2>
+        <?php counterize_most_visited_pages($amount2,$width); ?>
+  </div>
 
-	<?php
-	if($admin)
-	{
-		?>
-<div class="wrap">
-<h2><?php echo __("Most visited IPs ",'counterize') . "(" . $amount2 . ")"; ?></h2>
-		<?php counterize_most_visited_IPs($amount2,$width); ?></div>
-		<?php
-}
-?>
-<div class="wrap">
-<h2><?php echo __("Most seen referers ",'counterize') . "(" . $amount2 . ")"; ?></h2>
-<?php counterize_most_visited_referrers($amount2,$width); ?></div>
-<div class="wrap">
-<h2><?php echo __("Most used browsers ",'counterize') . "(" . $amount2 . ")";?></h2>
-<?php counterize_most_used_browsers_without_version($amount2,$width); ?>
-</div>
+  <?php
+  if($admin)
+  {
+  ?>
+    <div class="wrap">
+        <h2><?php echo __("Most visited IPs ",'counterize') . "(" . $amount2 . ")"; ?></h2>
+        <?php counterize_most_visited_IPs($amount2,$width); ?>
+    </div>
+  <?php
+  }
+  ?>
+  <div class="wrap">
+        <h2><?php echo __("Most seen referers ",'counterize') . "(" . $amount2 . ")"; ?></h2>
+        <?php counterize_most_visited_referrers($amount2,$width); ?>
+  </div>
+  <div class="wrap">
+        <h2><?php echo __("Most used browsers ",'counterize') . "(" . $amount2 . ")";?></h2>
+        <?php counterize_most_used_browsers_without_version($amount2,$width); ?>
+  </div>
 
-<div class="wrap">
-<h2><?php echo __("Most used browsers versions ",'counterize') . "(" . $amount2 . ")";?></h2>
-<?php counterize_most_used_browsers($amount2,$width); ?></div>
+  <div class="wrap">
+        <h2><?php echo __("Most used browsers versions ",'counterize') . "(" . $amount2 . ")";?></h2>
+        <?php counterize_most_used_browsers($amount2,$width); ?>
+  </div>
 
-<div class="wrap">
-<h2><?php echo __("Most used operating systems ",'counterize') . "(" . $amount2 . ")";?></h2>
-<?php counterize_most_used_os($amount2,$width); ?></div>
+  <div class="wrap">
+        <h2><?php echo __("Most used operating systems ",'counterize') . "(" . $amount2 . ")";?></h2>
+        <?php counterize_most_used_os($amount2,$width); ?>
+  </div>
 
-<div class="wrap">
-<h2><?php echo __("Most searched keywords ",'counterize') . "(" . $amount2 . ")";?></h2>
-<?php counterize_most_searched_Keywords($amount2,$width); ?></div>
-<?php
+  <div class="wrap">
+       <h2><?php echo __("Most searched keywords ",'counterize') . "(" . $amount2 . ")";?></h2>
+       <?php counterize_most_searched_Keywords($amount2,$width); ?>
+  </div>
+ <?php
 }
 
 function counterize_manage_page()
 {
-	?>
-<script language="javascript" type="text/javascript">
+  ?><script language="javascript" type="text/javascript">
         function conf(url)
         {
                 if (confirm('<?php _e('Are you sure that you want to delete this entry?','counterize'); ?>'))
@@ -1283,51 +1299,51 @@ function counterize_manage_page()
 				field[i].checked = false ;
 		}
 
-	</script>
+	</script>	
+  
+  <?php
+  
+  $updateText = "";
+  if (isset($_GET['killmass']))
+  	if ($_GET['killmass']=='yes')
+  		if (isset($_POST['counterize_killemall']))
+  		{
+  			foreach ($_POST['counterize_killemall'] as $key => $val)
+  			{
+  				counterize_killEntry($val);
+  				$updateText .= __('Entry: '.$val.' removed<br />','counterize');
+  			}
+  			counterize_updateText($updateText);
+  		}
 
-	<?php
+  # For the zap-an-entry-option
+  if (isset($_GET['kill']))
+  {
+    counterize_killEntry($_GET['kill']);
+    counterize_updateText(__("Deleting entry ","counterize") . $_GET['kill']);
+  }
 
-	$updateText = "";
-	if (isset($_GET['killmass']))
-	if ($_GET['killmass']=='yes')
-	if (isset($_POST['counterize_killemall']))
-	{
-		foreach ($_POST['counterize_killemall'] as $key => $val)
-		{
-			counterize_killEntry($val);
-			$updateText .= __('Entry: '.$val.' removed<br />','counterize');
-		}
-		counterize_updateText($updateText);
-	}
-
-	# For the zap-an-entry-option
-	if (isset($_GET['kill']))
-	{
-		counterize_killEntry($_GET['kill']);
-		counterize_updateText(__("Deleting entry ","counterize") . $_GET['kill']);
-	}
-
-	counterize_showStats(true);
-	counterize_show_history();
-	counterize_pagefooter();
+  counterize_showStats(true);
+  counterize_show_history();
+  counterize_pagefooter();
 }
 
 function counterize_filter($data)
 {
-	$pattern = '/\<\!\-\-\s*counterize_stats\s*\-\-\>/';
-	while(preg_match($pattern, $data, $matches))
-	{
-		ob_start();
+  $pattern = '/\<\!\-\-\s*counterize_stats\s*\-\-\>/';
+        while(preg_match($pattern, $data, $matches))
+  {
+                ob_start();
 
-		counterize_showStats();
-		counterize_copyright();
+                counterize_showStats();
+                counterize_copyright();
 
-		$content = ob_get_contents();
-		ob_end_clean();
-		$replace_pattern = $pattern;
-		$data = preg_replace($replace_pattern, $content, $data);
-	}
-	return $data;
+                $content = ob_get_contents();
+                ob_end_clean();
+                $replace_pattern = $pattern;
+                $data = preg_replace($replace_pattern, $content, $data);
+        }
+        return $data;
 }
 
 include("counterize_admin.php");
@@ -1335,10 +1351,10 @@ include("counterize_dashboard.php");
 
 function counterize_add_pages()
 {
-	# Set it up... - add to Dashboard and options-page.
-	add_action('admin_footer', 'counterize_dashboard');
-	add_submenu_page('edit.php',__('Counterize II'), __('Counterize II'), 8, __FILE__, 'counterize_manage_page');
-	add_options_page('Counterize II Options', 'Counterize II', 8, basename(__FILE__), 'counterize_options_page');
+  # Set it up... - add to Dashboard and options-page.
+  add_action('admin_footer', 'counterize_dashboard');
+  add_submenu_page('edit.php',__('Counterize II'), __('Counterize II'), 8, __FILE__, 'counterize_manage_page');
+  add_options_page('Counterize II Options', 'Counterize II', 8, basename(__FILE__), 'counterize_options_page');
 }
 
 add_action('admin_menu', 'counterize_add_pages');
