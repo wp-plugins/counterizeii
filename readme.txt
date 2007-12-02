@@ -25,50 +25,35 @@ External stats page to display in blog posts - visit the <a href="http://www.nav
 
 After you have installed the Counterize II-Plugin, you can see a lot of diagrams on the Counterize II stats page (Dashboard/Counterize II).
 
-Most likely you’d like to have a counter somewhere on your pages, showing XX hits or something like that. Here’s an overview of the functions which can be used in your Wordpress sidebar.
+Most likely you'd like to have a counter somewhere on your pages, showing XX hits or something like that. Here's an overview of the functions which can be used in your Wordpress sidebar.
 
-New: <!-- counterize_stats --> 
-– Shows a complete stats page in one of your blog posts.
+New: &lt;!-- counterize_stats --&gt; - Shows a complete stats page in one of your blog posts.
 
-echo counterize_getuniqueurl()
-– Returns amount of unique URl’s that have been shown
+echo counterize_getuniqueurl() – Returns amount of unique URl's that have been shown
 
-echo counterize_getamount()
-– Returns total hits seen by Counterize.
+echo counterize_getamount() – Returns total hits seen by Counterize.
 
-echo counterize_gethitstoday()
-– Returns total hits registered today.
+echo counterize_gethitstoday() – Returns total hits registered today.
 
-echo counterize_getuniquebrowsers()
-– Returns amount of unique browser-strings that have visited.
+echo counterize_getuniquebrowsers() – Returns amount of unique browser-strings that have visited.
 
-echo counterize_getuniquereferers()
-– Returns amount of unique referers that’s registered.
+echo counterize_getuniquereferers() – Returns amount of unique referers that's registered.
 
-echo counterize_getlatest7days()
-– Returns total amount of hits from the last 7 days.
+echo counterize_getlatest7days() – Returns total amount of hits from the last 7 days.
 
-echo counterize_getuniqueamount()
-– Returns total unique IP’s that’s been seen.
+echo counterize_getuniqueamount() – Returns total unique IP's that's been seen.
 
-echo counterize_getfromcurrentip()
-– Returns total hits from the IP that’s visiting.
+echo counterize_getfromcurrentip() – Returns total hits from the IP that's visiting.
 
-echo counterize_getuniquehitstoday()
-– Returns the number of different IP’s registered today.
+echo counterize_getuniquehitstoday() – Returns the number of different IP's registered today.
 
-echo counterize_gethitstodayfromcurrentip()
-– Returns daily hits from the IP that’s visiting.
+echo counterize_gethitstodayfromcurrentip() – Returns daily hits from the IP that's visiting.
 
-echo counterize_return_first_hit()
-– Returns the date of the first registrated entry in the database.
+echo counterize_return_first_hit() – Returns the date of the first registrated entry in the database.
 
-counterize_most_visited_pages()
-– Create graph of most visited pages.
+counterize_most_visited_pages() – Create graph of most visited pages.
 
-counterize_most_visited_ips()
-– Create graph of most active IPs.
+counterize_most_visited_ips() – Create graph of most active IPs.
 
-counterize_most_used_browsers()
-– Create graph of most seen useragents.
+counterize_most_used_browsers() – Create graph of most seen useragents.
  
