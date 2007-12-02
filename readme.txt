@@ -12,3 +12,7 @@ Simple counter-plugin with no external libs - saves IP, timestamp, visited URl, 
 1. Unzip the package and upload the folder **counterizeii** to **/wp-content/plugins/**.
 1. Activate the plugin through the **Plugins** menu in WordPress.
 1. Go to **Counterize II** on **Options** page, configurate your settings. *Save the settings*
+
+== Sample ==
+
+ External stats page to display in blog posts - visit the sample (http://www.navision-blog.de/counterize/blog-statistik/). 
