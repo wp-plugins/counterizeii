@@ -1,6 +1,6 @@
 === Counterize II ===
 Contributors: Steffen Forkmann
-Tags: statistics
+Tags: statistics, admin, stats
 Requires at least: 2.0.2
 Tested up to: 2.3.1
 Stable tag: 2.12
