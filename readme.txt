@@ -6,7 +6,7 @@ Tested up to: 2.3.1
 Stable tag: 2.12
 
 Simple counter-plugin with no external libs - saves IP, timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information.
-External stats page to display in blog posts - visit the sample (http://www.navision-blog.de/counterize/blog-statistik/).
+External stats page to display in blog posts - visit the <a href="http://www.navision-blog.de/counterize/blog-statistik/">sample</a>.
 
 == Installation ==
 
