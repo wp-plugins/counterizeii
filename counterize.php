@@ -3,12 +3,14 @@
  Plugin Name: Counterize II
  Plugin URI: http://www.navision-blog.de/counterize
  Description: Simple counter-plugin with no external libs - saves IP, timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
- Version: 2.12
+ Version: 2.12.1
  Author: Steffen Forkmann
  Author URI: http://navision-blog.de
 */
 
 /*
+ New in 2.12.1
+ - fixed folder
  New in 2.12
  - lots of sql fixing (thaks to Eric blogs.jobdig.com/wwds)
  New in 2.11
@@ -941,11 +943,11 @@ $nofollow = true, $maxwidth = "100%", $shorten = true)
 
 		<td style="width: 65%" align="left"><img src="<?php echo get_option("siteurl") . "/wp-content/plugins/";
                         if ($group < 40)
-                                echo "counterize/counterize_red.png";
+                                echo "counterizeii/counterize_red.png";
                         else if ($group < 80)
-                                echo "counterize/counterize_yellow.png";
+                                echo "counterizeii/counterize_yellow.png";
                         else
-                                echo "counterize/counterize_green.png";
+                                echo "counterizeii/counterize_green.png";
                         ?>" style="height:8px; width:<?php echo $width ?>px; vertical-align:bottom"
                         alt="<?php echo $header . ' - ' . htmlspecialchars($row->label) . ' - ' . $row->amount . ' - ' . $percent . ' %' ?>" />
 		&nbsp; <small><strong> <?php echo $percent; ?> % </strong></small></td>
@@ -996,11 +998,11 @@ function counterize_renderstats($rows, $max_height = 80, $maxwidth = "100%")
 		<br />
 		<img src="<?php echo get_option("siteurl") . "/wp-content/plugins/";
                         if ($group < 40)
-                                echo "counterize/counterize_red.png";
+                                echo "counterizeii/counterize_red.png";
                         else if ($group < 80)
-                                echo "counterize/counterize_yellow.png";
+                                echo "counterizeii/counterize_yellow.png";
                         else
-                                echo "counterize/counterize_green.png";
+                                echo "counterizeii/counterize_green.png";
                         ?>" style="width:8px; height:<?php echo $height ?>px; vertical-align:bottom" alt="Statistics" />
                         <?php
                         echo "<br />$percent<br />%</small></td>";
@@ -1048,10 +1050,10 @@ function counterize_show_history()
 <div class="wrap">
 <h2><?php echo $howmany; ?></h2>
 
-<a href="edit.php?page=counterize/counterize.php"><?php _e("Reset Filters",'counterize'); ?></a></br>
+<a href="edit.php?page=counterizeii/counterize.php"><?php _e("Reset Filters",'counterize'); ?></a></br>
 </br>
 <form method="post"
-	action="edit.php?page=counterize/counterize.php&amp;killmass=yes"
+	action="edit.php?page=counterizeii/counterize.php&amp;killmass=yes"
 	name="tablesForm" id="tablesForm">
 <table width="100%" cellpadding="3" cellspacing="3">
 	<tr class="alternate">
@@ -1077,20 +1079,20 @@ function counterize_show_history()
 		<td><?php echo $entry->id; ?></small></td>
 		<td scope="col" width="10%"><small><?php echo "<a href=\"" . get_option("counterize_whois") . $entry->ip . "\">" . $entry->ip . "</a>"; ?>
 		(<a
-			href="edit.php?page=counterize/counterize.php&ipfilter=<?php echo $entry->ip; ?>">F</a>)
+			href="edit.php?page=counterizeii/counterize.php&ipfilter=<?php echo $entry->ip; ?>">F</a>)
 		(<a target="_blank"
 			href="http://www.geoiptool.com/?IP=<?php echo $entry->ip; ?>">V</a>)</small>
 		</td>
 		<td scope="col" width="14%"><small><?php echo $entry->timestamp; ?> </small></td>
 		<td scope="col" width="25%"><small><?php echo "<a href=\"" . $entry->url . "\">" . wordwrap($entry->url, 30, "\n", 1); ?>
 		</a> (<a
-			href="edit.php?page=counterize/counterize.php&urifilter=<?php echo $entry->url; ?>">F</a>)</small></td>
+			href="edit.php?page=counterizeii/counterize.php&urifilter=<?php echo $entry->url; ?>">F</a>)</small></td>
 		<td scope="col" width="20%"><small> <?php
 		if ($entry->referer != "unknown")
 		{
 			echo "<a href=\"" . $entry->referer . "\">" . wordwrap($entry->referer, 30, "\n", 1) . "</a>";
 			?> (<a
-			href="edit.php?page=counterize/counterize.php&refererfilter=<?php echo $entry->referer; ?>">F</a>)
+			href="edit.php?page=counterizeii/counterize.php&refererfilter=<?php echo $entry->referer; ?>">F</a>)
 			<?php
 }
 else
@@ -1100,7 +1102,7 @@ echo wordwrap($entry->referer, 30, "\n", 1);
 		</td>
 		<td><small><?php echo $entry->keyword; ?></small></td>
 		<td scope="col" style="width: 5%"><a
-			href="javascript:conf('edit.php?page=counterize/counterize.php&amp;kill=<?php echo $entry->id; ?>');">
+			href="javascript:conf('edit.php?page=counterizeii/counterize.php&amp;kill=<?php echo $entry->id; ?>');">
 		<font color="red" size="+1">X</font> </a></td>
 		<?php
 		$i++;

@@ -12,8 +12,8 @@ $counterize_width_height = "14";
 
 // end settings
 
-$counterize_image_url = get_option("siteurl") . "/wp-content/plugins/counterize/browsers";
-$counterize_image_path = ABSPATH . "/wp-content/plugins/counterize/browsers";
+$counterize_image_url = get_option("siteurl") . "/wp-content/plugins/counterizeii/browsers";
+$counterize_image_path = ABSPATH . "/wp-content/plugins/counterizeii/browsers";
 
 function counterize_print_browser ($before = '', $after = '', $image = false, $between = 'on') {
         global $user_ID, $post, $comment;

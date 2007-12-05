@@ -12,7 +12,7 @@ function counterize_dashboard()
 	$todayunique = counterize_getuniquehitstoday();
   if ($admin == 'wp-admin' && basename($_SERVER['SCRIPT_FILENAME']) == 'index.php')
   {
-		$content = "<h3>" . _('Counterize II Status') . " <a href='edit.php?page=counterize/counterize.php'>&raquo;</a> </h3>";
+		$content = "<h3>" . _('Counterize II Status') . " <a href='edit.php?page=counterizeii/counterize.php'>&raquo;</a> </h3>";
 		$content .= _('Total: ') . '<strong>' . $count . '</strong> ' . _('hits and ') . '<strong>' . $unique . '</strong>' . _(' unique.');
 		$content .= "<p>". _('Today: ') . '<strong>' . $todaycount . '</strong> ' . _('hits and ') . '<strong>' . $todayunique . '</strong>' . _(' unique.') . "</p>";
 		$content .= "<p>". _('Currently: ') . '<strong>' . $online . '</strong> ' . _(' users online.') . "</p>";
