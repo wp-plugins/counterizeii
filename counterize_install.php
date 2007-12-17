@@ -13,7 +13,7 @@ function counterize_install()
   
   if($MajorVersion < 2)
   {
-    $sql = 'SHOW TABLES LIKE \''%counterize_logTable().'\'';
+    $sql = 'SHOW TABLES LIKE \'' . counterize_logTable() . '\'';
     $results = $wpdb->query($sql);
   
     if ($results == 0)
