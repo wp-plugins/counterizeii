@@ -9,12 +9,14 @@
 */
 
 /*
+ New in 2.12.4  
+ - 2 new functions (thanks to KnickerBlogger.net)
  New in 2.12.3
  - fixed installtion
  New in 2.12.1 /n 2.12.2
  - fixed folder
  New in 2.12
- - lots of sql fixing (thaks to Eric blogs.jobdig.com/wwds)
+ - lots of sql fixing (thanks to Eric blogs.jobdig.com/wwds)
  New in 2.11
  - XHTML valid (thanks to Julia http://julialoeba.de)
  - Japanese version (thanks to Urepko http://wppluginsj.sourceforge.jp/)
@@ -311,6 +313,39 @@ function counterize_most_visited_pages($number = 10, $width = 300)
 	$rows = $wpdb->get_results($sql);
 
 	counterize_renderstats_vertical($rows, __('Page','counterize'), $width, false);
+}
+
+function counterize_most_visited_pages24hrs($number = 10, $width = 300)
+{
+  $onedayago = date("Y-m-d", time()-86400);
+  $wpdb =& $GLOBALS['wpdb'];
+  $sql = "SELECT count as amount, p.url as url, p.url as label "
+  . " FROM " .counterize_logTable(). " m, " . counterize_pageTable(). " p "
+  . " WHERE m.pageID = p.pageID and "
+  . " m.timestamp >= '$onedayago'"
+  . " GROUP BY p.url "
+  . " ORDER BY count DESC LIMIT $number";
+  $rows = $wpdb->get_results($sql);
+  
+  counterize_renderstats_vertical($rows, __('Referer','counterize'), $width);
+}
+
+function counterize_most_visited_referrers24hrs($number = 10, $width = 300)
+{
+  $onedayago = date("Y-m-d", time()-86400);
+  $wpdb =& $GLOBALS['wpdb'];
+  $sql = "SELECT count as amount, r.name as label, r.name as url "
+  . " FROM ".counterize_logTable(). " m, ". counterize_refererTable(). " r "
+  . " WHERE m.refererID = r.refererID and "
+  . " r.name 'unknown' and "
+  . " r.name NOT LIKE '" . $wpdb->escape(get_option("home")) . "%%' "
+  . " and r.name NOT LIKE '" . $wpdb->escape(get_option("siteurl")) . "%%' "
+  . " and m.timestamp >= '$onedayago'"
+  . " GROUP BY r.name "
+  . " ORDER BY count DESC LIMIT $number";
+  $rows = $wpdb->get_results($sql);
+  
+  counterize_renderstats_vertical($rows, __('Referer','counterize'), $width);
 }
 
 
