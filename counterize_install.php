@@ -178,8 +178,14 @@ function counterize_install()
     $wpdb->query($sql);     
   }
   
+  if($minorVersion < 13)
+  {
+    $sql = "UPDATE `".counterize_logTable()."` set IP=MD5(IP);" ;
+    $wpdb->query($sql);     
+  }
+  
   // Set new Version
   update_option('counterize_MajorVersion',2);
-  update_option('counterize_MinorVersion',12);
+  update_option('counterize_MinorVersion',13);
 }
 ?>

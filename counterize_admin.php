@@ -76,13 +76,6 @@ function counterize_options_page()
   	  counterize_updateText(__('Excluded users saved. Current number of excluded users: ',"counterize") . count($_POST['excluded_users']));
   }
   
-  # For changing whois-server
-  if (isset($_POST['adm_whois']))
-  {
-      update_option('counterize_whois', $_POST['whois']);
-  	  counterize_updateText('Whois-Server changed');
-  }  
-  
   # For the "max-width"-administration
   if (isset($_POST['adm_maxWidth']))
   {
@@ -162,25 +155,8 @@ function counterize_options_page()
   		      <input type="submit" name="flush" value="<?php _e("Empty database!","counterize"); ?>" />
   		    </form>
   		  </td>
-  	  </tr>	  	
+  	  </tr>	  	 
   	  <tr class="alternate">
-  		  <td>
-  		    <?php _e("Whois-Server","counterize"); ?>
-  		    <br><small><br>
-  		    <?php _e("Samples","counterize"); ?>: 
-          <ul>
-            <li>http://ws.arin.net/cgi-bin/whois.pl?queryinput=</li>
-            <li>http://www.ripe.net/whois?form_type=simple&searchtext=</li>
-          </ul>
-  		  </td>
-  		  <td>
-  		    <form action="" method="post" >
-  		      <input type="text" value="<?php echo get_option('counterize_whois'); ?>" name="whois" size="70" /><br />
-  		      <input type="submit" name="adm_whois" value="<?php _e('Save settings',"counterize"); ?>"/>
-  		    </form>  		
-  		  </td>
-  	  </tr>  
-  	  <tr>
   		  <td>
   			  <?php _e("Maximum width for labels","counterize"); ?>
   		  </td>

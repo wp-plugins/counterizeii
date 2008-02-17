@@ -2,13 +2,17 @@
 /*
  Plugin Name: Counterize II
  Plugin URI: http://www.navision-blog.de/counterize
- Description: Simple counter-plugin with no external libs - saves IP, timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
- Version: 2.12.7
+ Description: Simple counter-plugin with no external libs - saves timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
+ Version: 2.13.0
  Author: Steffen Forkmann
  Author URI: http://navision-blog.de
 */
 
 /*
+ New in 2.13.0
+ - no more ip-logging (this is illegal in some countries e.g. Germany)  
+    counterize stores only a small hash to distingiush between two users
+    and to get information about the user count 
  New in 2.12.7
  - logging postID for later analysis (thanks to Alfred likemind.co.uk)  
  New in 2.12.6
@@ -172,14 +176,6 @@ function counterize_getkeywordamount()
 function counterize_getuniqueamount()
 {
 	$sql = 'SELECT count(DISTINCT IP) FROM ' . counterize_logTable();
-	$wpdb =& $GLOBALS['wpdb'];
-	return $wpdb->get_var($sql);
-}
-
-# Returns amount of entries in the DB matching the visiting IP-address.
-function counterize_getfromcurrentip()
-{
-	$sql = 'SELECT COUNT(1) FROM '.counterize_logTable().' WHERE IP = "' . $_SERVER['REMOTE_ADDR'] . '"';
 	$wpdb =& $GLOBALS['wpdb'];
 	return $wpdb->get_var($sql);
 }
@@ -369,17 +365,6 @@ function counterize_most_visited_referrers($number = 10, $width = 300)
 }
 
 
-function counterize_most_visited_ips($number = 10, $width = 300)
-{
-	$wpdb =& $GLOBALS['wpdb'];
-	$number = $wpdb->escape($number);
-	$sql = "SELECT COUNT(IP) AS amount, IP as label, concat('http://www.geoiptool.com/?IP=',IP) as url
-  FROM ".counterize_logTable()." GROUP BY IP ORDER BY amount DESC LIMIT $number";
-	$rows = $wpdb->get_results($sql);
-
-	counterize_renderstats_vertical($rows, 'IP', $width);
-}
-
 function counterize_most_searched_keywords($number = 10, $width = 300)
 {
 	$wpdb =& $GLOBALS['wpdb'];
@@ -550,14 +535,6 @@ function counterize_getuniquehitstoday()
 	return $wpdb->get_var($sql);
 }
 
-# Returns amount of hits today, from the visiting IP
-function counterize_gethitstodayfromcurrentip()
-{
-	$today = date("Y-m-d");
-	$sql = "SELECT COUNT(1) FROM ".counterize_logTable()." WHERE timestamp >= '$today' AND IP = '" . $_SERVER['REMOTE_ADDR'] . "'";
-	$wpdb =& $GLOBALS['wpdb'];
-	return $wpdb->get_var($sql);
-}
 
 # Fetch information matching ID in DB.
 function counterize_getentries($amount = 50, $entryID = null)
@@ -574,8 +551,6 @@ function counterize_getentries($amount = 50, $entryID = null)
 	$sql .= "WHERE m.pageID = p.pageID and m.agentID = ua.agentID and m.refererID = r.refererID ";
 	$sql .= " and k.keywordID = r.keywordID and ";
 
-	if($_GET["ipfilter"])
-	$sql .= " m.ip = '" . $wpdb->escape($_GET["ipfilter"]) ."' and ";
 	if($_GET["urifilter"])
 	$sql .= " p.url = '" . $wpdb->escape($_GET["urifilter"]) ."' and ";
 	if($_GET["refererfilter"])
@@ -787,7 +762,7 @@ function counterize_add()
 
 		$wpdb =& $GLOBALS['wpdb'];
 		$sql = "INSERT INTO ".counterize_logTable()." (IP, timestamp, pageID, refererID, agentID) VALUES (";
-		$sql .= "'" . $wpdb->escape($remoteaddr) . "',";
+		$sql .= "'" . substr(md5($wpdb->escape($remoteaddr)),1,16) . "',";
 		$sql .= "'" . $timestamp . "', '";
 		$sql .= $pageID . "', '";
 		$sql .= $refererID . "', '";
@@ -1103,11 +1078,10 @@ function counterize_show_history()
 	<tr class="alternate">
 		<td scope="col" width="2%"><strong><?php _e("del",'counterize'); ?></strong></td>
 		<td scope="col" width="6%"><strong><?php _e("ID",'counterize'); ?></strong></td>
-		<td scope="col" width="13%"><strong><?php _e("IP",'counterize'); ?></strong></td>
 		<td scope="col" style="width: 14%"><strong><?php _e("Timestamp",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 30%"><strong><?php _e("URl",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 20%"><strong><?php _e("Referer",'counterize'); ?></strong></td>
-		<td scope="col" style="width: 14%"><strong><?php _e("UserAgent",'counterize'); ?></strong></td>
+		<td scope="col" style="width: 20%"><strong><?php _e("URl",'counterize'); ?></strong></td>
+		<td scope="col" style="width: 31%"><strong><?php _e("Referer",'counterize'); ?></strong></td>
+		<td scope="col" style="width: 10%"><strong><?php _e("UserAgent",'counterize'); ?></strong></td>
 		<td scope="col" style="width: 25%"><strong><?php _e("Keywords",'counterize'); ?></strong></td>
 		<td scope="col" style="width: 3%"><strong><?php _e("Kill",'counterize'); ?></strong></td>
 	</tr>
@@ -1121,12 +1095,6 @@ function counterize_show_history()
 			name='counterize_killemall[<?php echo $entry->id; ?>]'
 			value="<?php echo $entry->id; ?>" /></td>
 		<td><?php echo $entry->id; ?></small></td>
-		<td scope="col" width="10%"><small><?php echo "<a href=\"" . get_option("counterize_whois") . $entry->ip . "\">" . $entry->ip . "</a>"; ?>
-		(<a
-			href="edit.php?page=counterizeii/counterize.php&ipfilter=<?php echo $entry->ip; ?>">F</a>)
-		(<a target="_blank"
-			href="http://www.geoiptool.com/?IP=<?php echo $entry->ip; ?>">V</a>)</small>
-		</td>
 		<td scope="col" width="14%"><small><?php echo $entry->timestamp; ?> </small></td>
 		<td scope="col" width="25%"><small><?php echo "<a href=\"" . $entry->url . "\">" . wordwrap($entry->url, 30, "\n", 1); ?>
 		</a> (<a
@@ -1268,17 +1236,6 @@ function counterize_showStats($admin = false)
 <div class="wrap">
 <h2><?php echo __("Most visited pages ",'counterize') . "(" . $amount2 .")"; ?></h2>
 	<?php counterize_most_visited_pages($amount2,$width); ?></div>
-
-	<?php
-	if($admin)
-	{
-		?>
-<div class="wrap">
-<h2><?php echo __("Most visited IPs ",'counterize') . "(" . $amount2 . ")"; ?></h2>
-		<?php counterize_most_visited_IPs($amount2,$width); ?></div>
-		<?php
-}
-?>
 <div class="wrap">
 <h2><?php echo __("Most seen referers ",'counterize') . "(" . $amount2 . ")"; ?></h2>
 <?php counterize_most_visited_referrers($amount2,$width); ?></div>

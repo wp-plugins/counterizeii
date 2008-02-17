@@ -3,9 +3,12 @@ Contributors: Steffen Forkmann
 Tags: statistics, admin, stats
 Requires at least: 2.0.2
 Tested up to: 2.3.1
-Stable tag: 2.12
+Stable tag: 2.13
 
-Simple counter-plugin with no external libs - saves IP, timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information.
+Simple counter-plugin with no external libs - saves timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information.
+<b>Counterize II 2.13 doesn't store any IP information, because this is illegal in some countries (e.g. Germany).  
+Counterize stores only a small hash to distingiush between different users and to get information about the user count.</b> 
+
 External stats page to display in blog posts - visit the <a href="http://www.navision-blog.de/counterize/blog-statistik/">sample</a>.
 
 == Installation ==
@@ -56,4 +59,3 @@ counterize_most_visited_pages() – Create graph of most visited pages.
 counterize_most_visited_ips() – Create graph of most active IPs.
 
 counterize_most_used_browsers() – Create graph of most seen useragents.
- 
