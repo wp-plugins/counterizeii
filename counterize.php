@@ -3,12 +3,14 @@
  Plugin Name: Counterize II
  Plugin URI: http://www.navision-blog.de/counterize
  Description: Simple counter-plugin with no external libs - saves timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
- Version: 2.13.0
+ Version: 2.13.1
  Author: Steffen Forkmann
  Author URI: http://navision-blog.de
 */
 
 /*
+ New in 2.13.1
+ - french version available (Thanks to "Le blog de dgilz" http://dgilz.free.fr/)
  New in 2.13.0
  - no more ip-logging (this is illegal in some countries e.g. Germany)  
     counterize stores only a small hash to distingiush between two users
