@@ -9,6 +9,8 @@
 */
 
 /*
+ New in 2.13.3
+ - Keyword stats for today
  New in 2.13.2
  - DivByZero fixed  (Thanks to http://p30design.net)
  New in 2.13.1
@@ -374,6 +376,21 @@ function counterize_most_searched_keywords($number = 10, $width = 300)
 	$wpdb =& $GLOBALS['wpdb'];
 	$number = $wpdb->escape($number);
 	$sql = "SELECT count as amount, keyword as label FROM " . counterize_keywordTable() ." where keywordID <> 1 GROUP BY keyword ORDER BY count DESC LIMIT $number";
+	$rows = $wpdb->get_results($sql);
+
+	counterize_renderstats_vertical($rows, __('Keyword','counterize'), $width);
+}
+
+function counterize_most_searched_keywords_today($number = 10, $width = 300)
+{
+	$wpdb =& $GLOBALS['wpdb'];
+	$today = date("Y-m-d");	
+	$number = $wpdb->escape($number);
+	$sql = "SELECT count(1) as amount, k.keyword as label FROM " . counterize_keywordTable() . " k "
+	  .", " . counterize_logTable() . " l, " . counterize_refererTable() . " r "
+	  . " where r.refererID = l.refererID and r.keywordID = k.keywordID "
+    ." and k.keywordID <> 1  and l.timestamp >= '$today' GROUP BY k.keyword ORDER BY amount DESC LIMIT $number";
+
 	$rows = $wpdb->get_results($sql);
 
 	counterize_renderstats_vertical($rows, __('Keyword','counterize'), $width);
@@ -1264,7 +1281,12 @@ function counterize_showStats($admin = false)
 
 <div class="wrap">
 <h2><?php echo __("Most searched keywords ",'counterize') . "(" . $amount2 . ")";?></h2>
-<?php counterize_most_searched_Keywords($amount2,$width); ?></div>
+<?php counterize_most_searched_keywords($amount2,$width); ?></div>
+
+<div class="wrap">
+<h2><?php echo __("Most searched keywords today",'counterize') . "(" . $amount2 . ")";?></h2>
+<?php counterize_most_searched_keywords_today($amount2,$width); ?></div>
+
 <?php
 }
 
