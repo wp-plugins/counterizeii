@@ -10,21 +10,17 @@ function counterize_dashboard()
 	$todaycount = counterize_gethitstoday();
 	$online = counterize_get_online_users();
 	$todayunique = counterize_getuniquehitstoday();
-  if ($admin == 'wp-admin' && basename($_SERVER['SCRIPT_FILENAME']) == 'index.php')
-  {
-		$content = "<h3>" . _('Counterize II Status') . " <a href='edit.php?page=counterizeii/counterize.php'>&raquo;</a> </h3>";
-		$content .= _('Total: ') . '<strong>' . $count . '</strong> ' . _('hits and ') . '<strong>' . $unique . '</strong>' . _(' unique.');
-		$content .= "<p>". _('Today: ') . '<strong>' . $todaycount . '</strong> ' . _('hits and ') . '<strong>' . $todayunique . '</strong>' . _(' unique.') . "</p>";
-		$content .= "<p>". _('Currently: ') . '<strong>' . $online . '</strong> ' . _(' users online.') . "</p>";
-
-    print ' <script language="javascript" type="text/javascript"> var ele = document.getElementById("zeitgeist");
-    if (ele)
-    {
-            var div = document.createElement("DIV");
-            div.innerHTML = "'.$content.'";
-            ele.appendChild(div);
-    } </script> ';
-	}
+	
+	?>
+		  <div class='dashboard-widget' style='width: 300px; height: 150px;'>
+  			<h3 class='dashboard-widget-title'><?php _e('Counterize II Status'); ?> <a href='edit.php?page=counterizeii/counterize.php'>&raquo;</a></h3>
+  			<div class='dashboard-widget-content' >
+  		  	<p><?php _e('Total: '); ?> <strong><?php echo $count; ?></strong> <?php _e('hits and ')?> <strong><?php echo $unique; ?></strong> <?php _e(' unique.'); ?><br />
+	        <?php _e('Today: '); ?><strong><?php echo $todaycount; ?></strong> <?php _e('hits and '); ?><strong><?php echo $todayunique; ?></strong><?php _e(' unique.'); ?><br />
+	        <?php _e('Currently: '); ?><strong><?php echo $online; ?></strong><?php _e(' users online.'); ?></p>
+       </div>
+     </div>
+  <?php
 }
 
 ?>

@@ -3,18 +3,14 @@
  Plugin Name: Counterize II
  Plugin URI: http://www.navision-blog.de/counterize
  Description: Simple counter-plugin with no external libs - saves timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
- Version: 2.13.3
+ Version: 2.14.0
  Author: Steffen Forkmann
- Author URI: http://www.navision-blog.de
+ Author URI: http://navision-blog.de
 */
 
 /*
- New in 2.13.3
- - Keyword stats for today
- New in 2.13.2
- - DivByZero fixed  (Thanks to http://p30design.net)
- New in 2.13.1
- - french version available (Thanks to "Le blog de dgilz" http://dgilz.free.fr/)
+ New in 2.14.0
+ - Dashboard for WP 2.5  
  New in 2.13.0
  - no more ip-logging (this is illegal in some countries e.g. Germany)  
     counterize stores only a small hash to distingiush between two users
@@ -953,15 +949,12 @@ $nofollow = true, $maxwidth = "100%", $shorten = true)
 	<?php
 	foreach($rows as $row)
 	{
-	  if($complete_amount)
-		  $percent = round($row->amount / $complete_amount * 100,2);
-	  else
-	    $percent = 0;
+		$percent = round($row->amount / $complete_amount * 100,2);
 
 		if($row->amount)
-		  $width = round($row->amount * $max_width / $max);
+		$width = round($row->amount * $max_width / $max);
 		else
-		  $width = 0;
+		$width = 0;
 
 		$group = round($width / $max_width * 100);
 		?>
@@ -1022,15 +1015,12 @@ function counterize_renderstats($rows, $max_height = 80, $maxwidth = "100%")
 
 	foreach($rows as $row)
 	{
-		if($complete_amount)
-		  $percent = round($row->amount / $complete_amount * 100,2);
-  	else
-	    $percent = 0;
-	    
+		$percent = round($row->amount / $complete_amount * 100,2);
+
 		if($row->amount)
-		  $height = round($row->amount * $max_height / $max);
+		$height = round($row->amount * $max_height / $max);
 		else
-		  $height = 0;
+		$height = 0;
 
 		$group = round($height / $max_height * 100);
 
@@ -1371,7 +1361,7 @@ include("counterize_dashboard.php");
 function counterize_add_pages()
 {
 	# Set it up... - add to Dashboard and options-page.
-	add_action('admin_footer', 'counterize_dashboard');
+	add_action('activity_box_end', 'counterize_dashboard');
 	add_submenu_page('edit.php',__('Counterize II'), __('Counterize II'), 8, __FILE__, 'counterize_manage_page');
 	add_options_page('Counterize II Options', 'Counterize II', 8, basename(__FILE__), 'counterize_options_page');
 }
