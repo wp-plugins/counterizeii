@@ -2,14 +2,16 @@
 Contributors: Steffen Forkmann
 Tags: statistics, admin, stats
 Requires at least: 2.0.2
-Tested up to: 2.5
-Stable tag: 2.13
+Tested up to: 2.5.
+Stable tag: 2.14
 
 Simple counter-plugin with no external libs - saves timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information.
 <b>Counterize II 2.13 doesn't store any IP information, because this is illegal in some countries (e.g. Germany).  
 Counterize stores only a small hash to distingiush between different users and to get information about the user count.</b> 
 
 External stats page to display in blog posts - visit the <a href="http://www.navision-blog.de/counterize/blog-statistik/">sample</a>.
+
+Version 2.14.0 supports new dashboard for Wordpress 2.5. 
 
 == Installation ==
 
