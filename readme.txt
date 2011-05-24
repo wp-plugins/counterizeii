@@ -27,10 +27,11 @@ Counterize stores only a small hash to distinguish between different users and t
 
 == Update ==
 
+(recommended) Use the new Counterize plugin available at http://wordpress.org/extend/plugins/counterize/
 1. Deactive **Counterize II** on the **Plugins** menu in WordPress
-1. Unzip the package and upload the folder **counterizeii** to **/wp-content/plugins/**.
-1. Activate the plugin through the **Plugins** menu in WordPress.
-1. Go to **Counterize II** on **Options** page, configurate your settings. *Save the settings*
+2. Unzip the package and upload the folder **counterizeii** to **/wp-content/plugins/**.
+3. Activate the plugin through the **Plugins** menu in WordPress.
+4. Go to **Counterize II** on **Options** page, configurate your settings. *Save the settings*
 
 == Functions ==
 
