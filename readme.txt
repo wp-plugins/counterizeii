@@ -13,11 +13,11 @@ Stable tag: 3.0.0
 <p>Saves timestamp, visited URl, referring URl and browserinformation in database,
 and can display total hits, unique hits and other statistics in WordPress webpages.</p>
 <p>Admin-interface available with detailed information.</p>
-<p><b>Counterize II 2.13 doesn't store any IP information, because this is illegal in some countries (e.g. Germany).
-Counterize stores only a small hash to distingiush between different users and to get information about the user count.</b></p>
-<p>External stats page to display in blog posts - visit the <a href="http://www.gabsoftware.com/products/scripts/counterize/">sample</a>.</p>
+<p><b>Counterize II doesn't store any IP information since the 2.13 version, because this is illegal in some countries (e.g. Germany).
+Counterize stores only a small hash to distinguish between different users and to get information about the user count.</b></p>
+<p>External stats page to display in blog posts - visit the <a href="http://www.gabsoftware.com/products/scripts/counterize/">plugin homepage</a> for a quick overview.</p>
 <p>Version 3.0.0 supports Wordpress 3.x.x.</p>
-<p><strong>Important note: </strong>The next versions of Counterize will be available at <a href="http://wordpress.org/extend/plugins/counterize/">sample</a></p>
+<p><strong>Important note: </strong>The next versions of Counterize will be available at <a href="http://wordpress.org/extend/plugins/counterize/">this address</a>.</p>
 
 == Installation ==
 
