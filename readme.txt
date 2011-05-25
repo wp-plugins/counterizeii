@@ -4,7 +4,7 @@ Donate link: http://www.gabsoftware.com/donate/
 Tags: statistics, admin, stats, counter, browser, os, operating, system
 Requires at least: 3.0.0
 Tested up to: 3.1.2
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 
 == Description ==
 
@@ -13,11 +13,11 @@ Stable tag: 3.0.0
 <p>Saves timestamp, visited URl, referring URl and browserinformation in database,
 and can display total hits, unique hits and other statistics in WordPress webpages.</p>
 <p>Admin-interface available with detailed information.</p>
-<p><b>Counterize II doesn't store any IP information since the 2.13 version, because this is illegal in some countries (e.g. Germany).
-Counterize stores only a small hash to distinguish between different users and to get information about the user count.</b></p>
-<p>External stats page to display in blog posts - visit the <a href="http://www.gabsoftware.com/products/scripts/counterize/">plugin homepage</a> for a quick overview.</p>
+<p><b>Counterize II 2.13 doesn't store any IP information, because this is illegal in some countries (e.g. Germany).
+Counterize stores only a small hash to distingiush between different users and to get information about the user count.</b></p>
+<p>External stats page to display in blog posts - visit the <a href="http://www.gabsoftware.com/products/scripts/counterize/">sample</a>.</p>
 <p>Version 3.0.0 supports Wordpress 3.x.x.</p>
-<p><strong>Important note: </strong>The next versions of Counterize will be available at <a href="http://wordpress.org/extend/plugins/counterize/">this address</a>.</p>
+<p><strong>Important note: </strong>The next versions of Counterize will be available at <a href="http://wordpress.org/extend/plugins/counterize/">sample</a></p>
 
 == Installation ==
 
@@ -27,11 +27,10 @@ Counterize stores only a small hash to distinguish between different users and t
 
 == Update ==
 
-(recommended) Use the new Counterize plugin available at http://wordpress.org/extend/plugins/counterize/
 1. Deactive **Counterize II** on the **Plugins** menu in WordPress
-2. Unzip the package and upload the folder **counterizeii** to **/wp-content/plugins/**.
-3. Activate the plugin through the **Plugins** menu in WordPress.
-4. Go to **Counterize II** on **Options** page, configurate your settings. *Save the settings*
+1. Unzip the package and upload the folder **counterizeii** to **/wp-content/plugins/**.
+1. Activate the plugin through the **Plugins** menu in WordPress.
+1. Go to **Counterize II** on **Options** page, configurate your settings. *Save the settings*
 
 == Functions ==
 
@@ -72,6 +71,9 @@ counterize_most_used_browsers() : Create graph of most seen useragents.
 counterize_most_used_browsers_without_version() : Create graph of most seen useragents without version.
 
 == Changelog ==
+
+= 3.0.1 =
+* Corrected installation issue. This should be the last update by me for Counterize II.
 
 = 3.0.0 =
 * Development is now continued by Gabriel Hautclocq (me)

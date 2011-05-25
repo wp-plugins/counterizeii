@@ -6,9 +6,9 @@ function counterize_install()
 {
 	update_option('counterize_logbots', "disabled");
 
-	$MajorVersion = get_option('counterize_MajorVersion');
-	$MinorVersion = get_option('counterize_MinorVersion');
-	$Revision = get_option('counterize_Revision');
+	$MajorVersion = get_option('counterize_MajorVersion', 1);
+	$MinorVersion = get_option('counterize_MinorVersion', 0);
+	$Revision = get_option('counterize_Revision', 0);
 
 	global $wpdb;
 
@@ -25,7 +25,7 @@ function counterize_install()
 				`IP` VARCHAR(16) NOT NULL,
 				`timestamp` DATETIME NOT NULL,
 				url VARCHAR(255) NOT NULL DEFAULT 'unknown',
-				referer VARCHAR(255) NOT NULL 'unknown',
+				referer VARCHAR(255) NOT NULL DEFAULT 'unknown',
 				useragent TEXT,
 				PRIMARY KEY(id)
 			)";
@@ -214,7 +214,7 @@ function counterize_install()
 	// Set new Version
 	update_option('counterize_MajorVersion', 3);
 	update_option('counterize_MinorVersion', 0);
-	update_option('counterize_Revision', 0);
+	update_option('counterize_Revision', 1);
 
 }
 ?>

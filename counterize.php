@@ -3,7 +3,7 @@
  Plugin Name: Counterize II
  Plugin URI: http://www.gabsoftware.com/products/scripts/counterize/
  Description: Simple counter-plugin with no external libs based on Counterize II by Steffen Forkmann (http://www.navision-blog.de/counterize) - saves timestamp, visited URl, referring URl and browserinformation in database, and can display total hits, unique hits and other statistics in WordPress webpages. Admin-interface available with detailed information...
- Version: 3.0.0
+ Version: 3.0.1
  Author: Gabriel Hautclocq
  Author URI: http://www.gabsoftware.com/
 */
