@@ -1,0 +1,380 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: counterize\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-16 20:44+0800\n"
+"PO-Revision-Date: 2011-05-16 20:48+0800\n"
+"Last-Translator: Gabriel Hautclocq <gabriel@gabsoftware.com>\n"
+"Language-Team: Gabriel Hautclocq <gabriel@gabsoftware.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: /home/gabriel/web/counterizeii/\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: counterize_dashboard.php:16
+msgid "Counterize II Status"
+msgstr "État de Counterize II"
+
+#: counterize_dashboard.php:18
+msgid "Total: "
+msgstr "Total&nbsp;: "
+
+#: counterize_dashboard.php:18
+#: counterize_dashboard.php:19
+msgid "hits and "
+msgstr "visites et "
+
+#: counterize_dashboard.php:18
+#: counterize_dashboard.php:19
+msgid " unique."
+msgstr " uniques."
+
+#: counterize_dashboard.php:19
+msgid "Today: "
+msgstr "Aujourd'hui&nbsp;:"
+
+#: counterize_dashboard.php:20
+msgid "Currently: "
+msgstr "Actuellement&nbsp;:"
+
+#: counterize_dashboard.php:20
+msgid " users online."
+msgstr "utilisateurs connectés."
+
+#: counterize_admin.php:17
+#: counterize_admin.php:31
+#: counterize_admin.php:106
+msgid " is not a valid number!"
+msgstr "n'est pas un nombre valide&nbsp;!"
+
+#: counterize_admin.php:57
+msgid "Database flushed!"
+msgstr "La base de données a été vidée."
+
+#: counterize_admin.php:57
+msgid "records deleted)"
+msgstr "enregistrements supprimés)"
+
+#: counterize_admin.php:66
+msgid "User-agent table refreshed!"
+msgstr "La table des user-agent a été rafraîchie&nbsp;!"
+
+#: counterize_admin.php:80
+msgid " is not a valid string!"
+msgstr "n'est pas une chaîne valide&nbsp;!"
+
+#: counterize_admin.php:93
+msgid "Excluded users saved. Current number of excluded users: "
+msgstr "Enregistrement effectué. Nombre actuel d'utilisateurs exclus&nbsp;: "
+
+#: counterize_admin.php:122
+msgid "Counterize configuration - Version "
+msgstr "Configuration de Counterize "
+
+#: counterize_admin.php:126
+msgid "Amount of rows to show in history"
+msgstr "Nombre de lignes à afficher dans l'historique"
+
+#: counterize_admin.php:127
+msgid "to view all"
+msgstr "pour tout afficher"
+
+#: counterize_admin.php:132
+#: counterize_admin.php:143
+#: counterize_admin.php:204
+#: counterize_admin.php:225
+#: counterize_admin.php:255
+msgid "Save settings"
+msgstr "Enregistrer la configuration"
+
+#: counterize_admin.php:138
+msgid "Rows to show in 'top xx' bars"
+msgstr "Nombre de lignes à afficher dans les graphiques"
+
+#: counterize_admin.php:149
+msgid "Enable/disable logging of <a href=\"http://en.wikipedia.org/wiki/Internet_bot\">bots</a>"
+msgstr "Enregistrement du passage des <a href=\"http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Bot\">bots</a>"
+
+#: counterize_admin.php:156
+msgid "Disable bot-logging"
+msgstr "Désactiver l'enregistrement des bots"
+
+#: counterize_admin.php:160
+msgid "Enable bot-logging"
+msgstr "Activer l'enregistrement des bots"
+
+#: counterize_admin.php:169
+msgid "Flush the Counterize Database"
+msgstr "Vider la base de données"
+
+#: counterize_admin.php:171
+msgid "(This means deleting all records and all stats!)"
+msgstr "(Attention, cette action effacera tous les enregistrements et toutes les statistiques&nbsp;!)"
+
+#: counterize_admin.php:178
+msgid "Empty database!"
+msgstr "Base de données vide&nbsp;"
+
+#: counterize_admin.php:185
+msgid "Refresh the user-agent table"
+msgstr "Rafraîchir la table des user-agent"
+
+#: counterize_admin.php:187
+msgid "(You should do this if you just upgraded from a previous version!)"
+msgstr "(Vous devriez rafraîchir cette table si vous venez de mettre à jour Counterize)"
+
+#: counterize_admin.php:193
+msgid "Refresh"
+msgstr "Rafraîchir"
+
+#: counterize_admin.php:199
+msgid "Maximum width for labels"
+msgstr "Taille maximum des étiquettes"
+
+#: counterize_admin.php:212
+msgid "Counterize excludelist"
+msgstr "Liste d'exclusion"
+
+#: counterize_admin.php:218
+msgid "IP's to exclude"
+msgstr "Adresses IP à exclure"
+
+#: counterize_admin.php:219
+msgid "(Enter IP's seperated with space)"
+msgstr "(entrez les IP séparées par une espace)"
+
+#: counterize_admin.php:235
+msgid "Select users that may not be counted:"
+msgstr "Utilisateurs à exclure&nbsp;:"
+
+#: counterize_admin.php:236
+msgid "(Use Ctrl-key for selecting multiple entries)"
+msgstr "(Utilisez la touche Ctrl pour sélectionner plusieurs entrées)"
+
+#: counterize.php:245
+msgid "Page"
+msgstr "URL"
+
+#: counterize.php:259
+#: counterize.php:276
+#: counterize.php:290
+#: counterize.php:1129
+msgid "Referer"
+msgstr "Sources"
+
+#: counterize.php:300
+#: counterize.php:315
+msgid "Keyword"
+msgstr "Mots-clés"
+
+#: counterize.php:333
+#: counterize.php:359
+#: counterize.php:385
+msgid "unknown"
+msgstr "inconnu"
+
+#: counterize.php:341
+#: counterize.php:367
+#: counterize.php:1130
+msgid "UserAgent"
+msgstr "Navigateurs"
+
+#: counterize.php:393
+msgid "Operating System"
+msgstr "Systèmes"
+
+#: counterize.php:904
+msgid "<strong>Need help? </strong>Go to <a href=\"http://www.gabsoftware.com/products/scripts/counterize/\">the Counterize II homepage</a> and search inside the comments. Others may have had the same question or problem as you..."
+msgstr "<strong>Besoin d'aide&nbsp;?</strong> Rendez-vous sur <a href=\"http://www.gabsoftware.com/products/scripts/counterize/\">la page d'accueil de Counterize II</a> et cherchez parmi les commentaires. D'autres personnes pourraient avoir posé les mêmes questions ou avoir été confrontés au même problème que vous..."
+
+#: counterize.php:916
+msgid "Statistics recorded with <a href=\"http://www.gabsoftware.com/products/scripts/counterize/\" title=\"Counterize II - Statistics-plugin for Wordpress by GabSoftware\">Counterize II</a>"
+msgstr "Statistiques enregistrées par <a href=\"http://www.gabsoftware.com/products/scripts/counterize/\" title=\"Counterize II - plugin de statistiques pour Wordpress, par GabSoftware\">Counterize II</a>"
+
+#: counterize.php:917
+msgid "Version"
+msgstr "Version"
+
+#: counterize.php:943
+msgid "Amount"
+msgstr "Quantité"
+
+#: counterize.php:944
+msgid "Percentage"
+msgstr "Pourcentage"
+
+#: counterize.php:1103
+msgid "Latest entries"
+msgstr "Historique "
+
+#: counterize.php:1118
+msgid "Reset Filters"
+msgstr "Ré-initialiser les filtres"
+
+#: counterize.php:1125
+msgid "del"
+msgstr "del"
+
+#: counterize.php:1126
+msgid "ID"
+msgstr "ID"
+
+#: counterize.php:1127
+msgid "Timestamp"
+msgstr "Date et heure"
+
+#: counterize.php:1128
+msgid "URl"
+msgstr "URL"
+
+#: counterize.php:1131
+msgid "Keywords"
+msgstr "Mots-clés"
+
+#: counterize.php:1132
+msgid "Kill"
+msgstr "Supprimer"
+
+#: counterize.php:1176
+msgid "Check All"
+msgstr "Cocher tout"
+
+#: counterize.php:1178
+msgid "Uncheck All"
+msgstr "Décocher tout"
+
+#: counterize.php:1180
+msgid "Delete selected Entries"
+msgstr "Supprimer les entrées sélectionnées"
+
+#: counterize.php:1198
+msgid "There's no data in the database - You can't see stats until you have data."
+msgstr "Il n'y a pas de données enregistrées dans la base. Vous ne pouvez pas afficher de statistiques tant qu'elle est vide."
+
+#: counterize.php:1204
+msgid "Hit Counter"
+msgstr "Compteur de visites"
+
+#: counterize.php:1207
+msgid "Total hits: "
+msgstr "Visites&nbsp;"
+
+#: counterize.php:1209
+msgid "Hits from unique IPs: "
+msgstr "Visiteurs uniques&nbsp;:"
+
+#: counterize.php:1211
+msgid "Total hits, today: "
+msgstr "Total des visites, aujourd'hui&nbsp;:"
+
+#: counterize.php:1213
+msgid "Hits from unique IPs, today: "
+msgstr "Visiteurs uniques aujourd'hui&nbsp;:"
+
+#: counterize.php:1215
+msgid "Hits, the last 7 days: "
+msgstr "Visites des 7 derniers jours&nbsp;:"
+
+#: counterize.php:1217
+msgid "Unique hits, the last 7 days: "
+msgstr "Visites uniques des 7 derniers jours&nbsp;:"
+
+#: counterize.php:1242
+msgid "Visits based on day of month"
+msgstr "Visites selon les jours du mois"
+
+#: counterize.php:1250
+#: counterize.php:1263
+#: counterize.php:1277
+msgid "Day"
+msgstr "Jour"
+
+#: counterize.php:1255
+msgid "Visits based on day of month (only this month)"
+msgstr "Visites selon les jours du mois actuel"
+
+#: counterize.php:1269
+msgid "Visits based on day of week"
+msgstr "Visites selon les jours de la semaine"
+
+#: counterize.php:1282
+msgid "Visits based on month"
+msgstr "Visites par mois"
+
+#: counterize.php:1290
+msgid "Month"
+msgstr "Mois"
+
+#: counterize.php:1295
+msgid "Visits based on hour of day"
+msgstr "Visites selon les heures de la journée"
+
+#: counterize.php:1303
+msgid "Hour"
+msgstr "Heure"
+
+#: counterize.php:1308
+msgid "Most visited pages "
+msgstr "Pages les plus vues "
+
+#: counterize.php:1311
+msgid "Most seen referers "
+msgstr "Sources les plus fréquentes "
+
+#: counterize.php:1314
+msgid "Most used browsers "
+msgstr "Navigateurs les plus utilisés "
+
+#: counterize.php:1319
+msgid "Most used browsers versions "
+msgstr "Navigateurs les plus utilisés (avec version) "
+
+#: counterize.php:1323
+msgid "Most used operating systems "
+msgstr "Systèmes d'exploitation les plus utilisés "
+
+#: counterize.php:1327
+msgid "Most searched keywords "
+msgstr "Mots-clés les plus recherchés "
+
+#: counterize.php:1331
+msgid "Most searched keywords today"
+msgstr "Mots-clés les plus recherchés aujourd'hui"
+
+#: counterize.php:1343
+msgid "Are you sure that you want to delete this entry?"
+msgstr "Êtes-vous certain de vouloir supprimer cette entrée&nbsp;?"
+
+#: counterize.php:1379
+msgid "Entry: "
+msgstr "Entrée&nbsp;:"
+
+#: counterize.php:1390
+msgid "Deleting entry "
+msgstr "Suppression de l'entrée "
+
+#: counterize.php:1423
+#: counterize.php:1424
+msgid "Counterize II"
+msgstr "Counterize II"
+
+#: counterize.php:1424
+msgid "Counterize II Options"
+msgstr "Options de Counterize II"
+
+#~ msgid "Graph / %"
+#~ msgstr "Pourcentage"
+#~ msgid "IP"
+#~ msgstr "Total des visites des 7 derniers jours :"
+#~ msgid "Most visited IPs "
+#~ msgstr "IP les plus fréquents"
+#~ msgid "Whois-Server"
+#~ msgstr "Serveur Whois"
+#~ msgid "Samples"
+#~ msgstr "Exemples"
+
